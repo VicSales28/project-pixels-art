@@ -1,10 +1,23 @@
 #title {
-  font-family: 'Press Start 2P',cursive;
+  font-family: 'Courier New', Courier, monospace;
   font-size: 25px;
   margin-top: 30px;
-  color:rgb(0,0,0);
-};
+  color: black;
+}
 #headerParagraph {
   font-family: 'Courier New', Courier, monospace;
-  color:rgb(128,128,128);
+  color: gray;
+}
+#color-palette {
+  width: fit-content;
+}
+.black {
+  background-color: black;
+}
+.color {
+  display: inline-block;
+  width: 25px;
+  height: 25px;
+  border: 1px solid black;
+  border-radius: 50%;
 }
