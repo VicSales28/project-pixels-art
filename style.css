@@ -10,6 +10,7 @@
 }
 #color-palette {
   width: fit-content;
+  margin-bottom: 12px;
 }
 .black {
   background-color: black;
@@ -20,4 +21,8 @@
   height: 25px;
   border: 1px solid black;
   border-radius: 50%;
+}
+#buttons {
+  display: inline-block;
+  justify-content: center;
 }
