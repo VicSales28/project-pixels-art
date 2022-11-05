@@ -24,13 +24,22 @@
   justify-content: center;
   padding: 5px;
 }
+#board-menu {
+  margin-bottom: 20px;
+}
 #pixel-board {
   width: fit-content;
   border: 1px solid black;
+  margin: 0 auto;
+  display: block;
+}
+.pixel-line{
+  display: flex;
 }
 .pixel {
   background-color: white;
   width: 40px;
   height: 40px;
   border: 1px solid black;
+  display: block;
 }

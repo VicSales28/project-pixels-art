@@ -40,10 +40,30 @@ window.onload = () => {
       createAndSaveRandomPalette ();
   }};
 
-// Gerar quadro de pixels
+  // Tornar background color branco
+ function clear() {
+  const pixels = document.querySelectorAll('.pixel');
+
+  for (let index = 0; index <pixels.length; index +=1) {
+    pixels[index].style.backgroundColor = 'white';
+  }
+};
+
+// Acionar limpeza do quadro
+clearBoard.addEventListener('click',clear);
+
+// Remover quadro visível
+function deleteBoard() {
+  for (let index = pixelBoard.childNodes.length -1; index >= 0; index -=1){
+    pixelBoard.removeChild(pixelBoard.childNodes[index]);
+  }
+};
+
+// Gerar quadro de pixels dinâmico
 function generateBoard (size) {
     if (size) {
     let newSize = size;
+    deleteBoard();
      if (size < 0) {
      alert ('Não são permitidos valores menores que zero, digite novamente.');
    } if (size < 5) {
@@ -59,7 +79,7 @@ function generateBoard (size) {
      pixel.className = 'pixel';
      divLine.appendChild(pixel);
    }}} else {
-    alert ('Board inválido')
+    alert ('Board inválido!')
    }
   };
 
