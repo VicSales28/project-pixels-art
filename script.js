@@ -3,8 +3,11 @@ let blackSelected = document.getElementById('blackSelected');
 let randomColor1 = document.getElementById('randomColor1');
 let randomColor2 = document.getElementById('randomColor2');
 let randomColor3 = document.getElementById('randomColor3');
-
 const buttonRandomColor = document.getElementById('button-random-color')
+const clearBoard = document.getElementById('clear-board')
+const inputBoard = document.getElementById('board-size');
+const vqvButton = document.getElementById('generate-board');
+const pixelBoard = document.getElementById('pixel-board');
 
 // Gera cores aleatórias para a paleta de cores 
 function getRandomColor () {
@@ -36,3 +39,34 @@ window.onload = () => {
      } else {
       createAndSaveRandomPalette ();
   }};
+
+// Gerar quadro de pixels
+function generateBoard (size) {
+    if (size) {
+    let newSize = size;
+     if (size < 0) {
+     alert ('Não são permitidos valores menores que zero, digite novamente.');
+   } if (size < 5) {
+     newSize = 5;
+   } if (size > 50) {
+     newSize = 50;
+   } for (let index = 0; index < newSize; index += 1) {
+     const divLine = document.createElement('div');
+     divLine.className = 'pixel-line';
+     pixelBoard.appendChild(divLine);
+    for (let index = 0; index < newSize; index += 1) {
+     const pixel = document.createElement('div');
+     pixel.className = 'pixel';
+     divLine.appendChild(pixel);
+   }}} else {
+    alert ('Board inválido')
+   }
+  };
+
+  // Inputar tamanho
+  function callBoard () {
+    generateBoard(inputBoard.value);
+  };
+
+  // Gera quadro de acordo com tamanho através do botão
+  vqvButton.addEventListener('click',callBoard);

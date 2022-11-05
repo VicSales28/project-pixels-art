@@ -24,3 +24,13 @@
   justify-content: center;
   padding: 5px;
 }
+#pixel-board {
+  width: fit-content;
+  border: 1px solid black;
+}
+.pixel {
+  background-color: white;
+  width: 40px;
+  height: 40px;
+  border: 1px solid black;
+}
