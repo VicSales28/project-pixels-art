@@ -71,7 +71,7 @@ function deleteBoard() {
 // Alterar classe entre os paletteItens clicados
 // Pixel adquire backgroundcolor conforme paletteItem clicado
 
-let selectedColor;
+let selectedColor = ' rgb(0,0,0)';
 
 document.addEventListener('click', function (event) {
   if (event.target.classList.contains('color')) {
