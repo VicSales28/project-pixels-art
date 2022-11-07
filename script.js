@@ -1,15 +1,15 @@
+// Constantes e variáveis utilizadas
 const paletteItens = document.querySelectorAll('.color');
-let blackSelected = document.getElementById('blackSelected');
-let randomColor1 = document.getElementById('randomColor1');
-let randomColor2 = document.getElementById('randomColor2');
-let randomColor3 = document.getElementById('randomColor3');
-const buttonRandomColor = document.getElementById('button-random-color')
-const clearBoard = document.getElementById('clear-board')
+const randomColorButton = document.getElementById('button-random-color')
+const clearButton = document.getElementById('clear-board')
 const inputBoard = document.getElementById('board-size');
 const vqvButton = document.getElementById('generate-board');
 const pixelBoard = document.getElementById('pixel-board');
+let blackSelected = document.getElementById('blackSelected');
+let selectedColor = ' rgb(0,0,0)';
 
-// Gerar cores aleatórias para a paleta de cores 
+// Função getRandomColor
+// Objetivo: Gerar cores aleatórias para a paleta de cores 
 function getRandomColor () {
   let r = Math.floor(Math.random() * 255);
   let g = Math.floor(Math.random() * 255);
@@ -19,7 +19,8 @@ function getRandomColor () {
 };
 getRandomColor();
 
-// Criar e salvar paleta de cores aleatórias no localStorage
+// Função createAndSaveRandomPalette
+// Objetivo: Criar e salvar paleta de cores aleatórias no localStorage
 const createAndSaveRandomPalette = () => {
   let colorList = [blackSelected.style.backgroundColor];
   for (let index = 1; index < paletteItens.length; index += 1) {
@@ -27,22 +28,27 @@ const createAndSaveRandomPalette = () => {
   } localStorage.setItem('colorPalette', JSON.stringify(colorList));
 };
 
-// Trocar as cores pressionando button
-buttonRandomColor.addEventListener('click',createAndSaveRandomPalette);
+// Elemento randomColorButton
+// Objetivo: Trocar as cores da paleta de maneira aleatória 
+randomColorButton.addEventListener('click',createAndSaveRandomPalette);
 
-// Ao recarregar página, cores aleatórias continuam as mesmas salvas no localStorage
-window.onload = () => {
-  const recovereArray = JSON.parse(localStorage.getItem('colorPalette'));
-  if (recovereArray != null && recovereArray !== '[]') {
-    randomColor1.style.backgroundColor = recovereArray[1]
-    randomColor2.style.backgroundColor = recovereArray[2]
-    randomColor3.style.backgroundColor = recovereArray[3]
+// Função rescuePreviousColorPalette
+// Objetivo: Recuperar cores da paleta salvas no localStorage
+function rescuePreviousColorPalette() {
+  const recovereColorPalette = JSON.parse(localStorage.getItem('colorPalette'));
+
+  if (recovereColorPalette != null && recovereColorPalette !== '[]') {
+
+    for (let index = 1; index < recovereColorPalette.length; index += 1) {
+      paletteItens[index].style.backgroundColor = recovereColorPalette[index];
+    }
   } else {
     createAndSaveRandomPalette();
   }
 };
 
-// Gerar quadro de pixels inicial
+// Função generateFirstBoard
+// Objetivo: Gerar quadro de pixels inicial 5 x 5
 function generateFirstBoard(size) {
   if (size) {
     let newSize = size;
@@ -60,18 +66,19 @@ function generateFirstBoard(size) {
 };
 generateFirstBoard(5);
 
-// Remover quadro inicial
+// Função deleteBoard
+// Objetivo: Remover quadro de pixels inicial 5 x 5
 function deleteBoard() {
   for (let index = pixelBoard.childNodes.length - 1; index >= 0; index -= 1) {
     pixelBoard.removeChild(pixelBoard.childNodes[index]);
   }
 };
 
-// Alterar classe entre os paletteItens clicados
-// Pixel adquire backgroundcolor conforme paletteItem clicado
-// Sequência de cores usadas no quadro são salvas no localStorage
-
-let selectedColor = ' rgb(0,0,0)';
+// Função anônima
+// Objetivos:
+// 1 - Alterar classe entre os paletteItens clicados
+// 2 - Transferir ao pixel clicado backgroundcolor conforme paletteItem clicado
+// 3 - Sequência de cores usadas no quadro são salvas no localStorage
 
 document.addEventListener('click', function (event) {
   if (event.target.classList.contains('color')) {
@@ -100,7 +107,8 @@ document.addEventListener('click', function (event) {
   }
 });
 
-// Tornar background color branco
+// Função clear
+// Objetivo: Transferir backgroundcolor white a todos pixels
 function clear() {
   const pixels = document.querySelectorAll('.pixel');
 
@@ -109,10 +117,12 @@ function clear() {
   }
 };
 
-// Acionar limpeza do quadro
-clearBoard.addEventListener('click', clear);
+// Elemento clearButton
+// Objetivo: "Limpar" todos pixels
+clearButton.addEventListener('click', clear);
 
-// Gerar quadro dinâmico de pixels
+// Função generateBoard
+// Objetivo: Gerar quadro dinâmico de pixels
 function generateBoard(size) {
   if (size) {
     let newSize = size;
@@ -143,10 +153,32 @@ function generateBoard(size) {
   }
 };
 
-// Inputar tamanho
+// Função reorganizeBoard
+// Objetivo: Reorganizar quadro de pixels de acordo com tamanho solicitado pelo usuário
 function reorganizeBoard() {
   generateBoard(inputBoard.value);
 };
 
-// Gerar quadro de acordo com tamanho solicitado pelo usuário
+// Elemento vqvButton
+// Objetivo: Gerar quadro de acordo com tamanho solicitado pelo usuário
 vqvButton.addEventListener('click', reorganizeBoard);
+
+// Função rescuePreviousPaintedBoard
+// Objetivo: Resgatar pixels pintados salvos no localStorage (sequência de cores)
+function rescuePreviousPaintedBoard() {
+  const pixel = document.querySelectorAll('.pixel');
+
+  if (localStorage.getItem('pixelBoard')) {
+    const recoverePaintedBoard = JSON.parse(localStorage.getItem('pixelBoard'));
+    for (let index = 0; index < pixel.length; index += 1) {
+      pixel[index].style.backgroundColor = recoverePaintedBoard[index];
+    }
+  }
+};
+
+// Window.onload
+// Objetivo: Acionar resgate de informações salvas ao recarregar página
+window.onload = () => {
+  rescuePreviousColorPalette()
+  rescuePreviousPaintedBoard()
+};
