@@ -58,7 +58,6 @@ function generateFirstBoard(size) {
     }
   }
 };
-
 generateFirstBoard(5);
 
 // Remover quadro inicial
@@ -70,6 +69,7 @@ function deleteBoard() {
 
 // Alterar classe entre os paletteItens clicados
 // Pixel adquire backgroundcolor conforme paletteItem clicado
+// Sequência de cores usadas no quadro são salvas no localStorage
 
 let selectedColor = ' rgb(0,0,0)';
 
@@ -87,6 +87,15 @@ document.addEventListener('click', function (event) {
       event.target.style.backgroundColor = 'white';
     } else {
       event.target.style.backgroundColor = selectedColor;
+
+      const pixel = document.querySelectorAll('.pixel');
+      const colorsUsed = [];
+
+      for (let index = 0; index < pixel.length; index += 1) {
+        const pixelColor = pixel[index].style.backgroundColor;
+        colorsUsed.push(pixelColor);
+      }
+      localStorage.setItem('pixelBoard', JSON.stringify(colorsUsed));
     }
   }
 });
