@@ -4,14 +4,17 @@
   margin-top: 30px;
   color: black;
 }
+
 #headerParagraph {
   font-family: 'Courier New', Courier, monospace;
   color: gray;
 }
+
 #color-palette {
   width: fit-content;
   margin-bottom: 12px;
 }
+
 .color {
   display: inline-block;
   width: 25px;
@@ -19,23 +22,28 @@
   border: 1px solid black;
   border-radius: 50%;
 }
+
 #buttons {
   display: inline-block;
   justify-content: center;
   padding: 5px;
 }
+
 #board-menu {
   margin-bottom: 20px;
 }
+
 #pixel-board {
   width: fit-content;
   border: 1px solid black;
   margin: 0 auto;
   display: block;
 }
-.pixel-line{
+
+.pixel-line {
   display: flex;
 }
+
 .pixel {
   background-color: white;
   width: 40px;

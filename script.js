@@ -10,23 +10,23 @@ let selectedColor = ' rgb(0,0,0)';
 
 // Função getRandomColor
 // Objetivo: Gerar cores aleatórias para a paleta de cores
-function getRandomColor () {
-  let r = Math.floor(Math.random() * 255);
-  let g = Math.floor(Math.random() * 255);
-  let b = Math.floor(Math.random() * 255);
+function getRandomColor() {
+  const r = Math.floor(Math.random() * 255);
+  const g = Math.floor(Math.random() * 255);
+  const b = Math.floor(Math.random() * 255);
 
   return `rgb(${r}, ${g}, ${b})`;
-};
+}
 getRandomColor();
 
 // Função createAndSaveRandomPalette
 // Objetivo: Criar e salvar paleta de cores aleatórias no localStorage
 const createAndSaveRandomPalette = () => {
-  let colorList = [blackSelected.style.backgroundColor];
+  const colorList = [blackSelected.style.backgroundColor];
   for (let index = 1; index < paletteItens.length; index += 1) {
     colorList.push(paletteItens[index].style.backgroundColor = getRandomColor());
   } localStorage.setItem('colorPalette', JSON.stringify(colorList));
-};
+}
 
 // Elemento randomColorButton
 // Objetivo: Trocar as cores da paleta de maneira aleatória
@@ -44,13 +44,13 @@ function rescuePreviousColorPalette() {
   } else {
     createAndSaveRandomPalette();
   }
-};
+}
 
 // Função generateFirstBoard
 // Objetivo: Gerar quadro de pixels inicial 5 x 5
 function generateFirstBoard(size) {
   if (size) {
-    let newSize = size;
+    const newSize = size;
     for (let index = 0; index < newSize; index += 1) {
       const divLine = document.createElement('div');
       divLine.className = 'pixel-line';
@@ -62,7 +62,7 @@ function generateFirstBoard(size) {
       }
     }
   }
-};
+}
 generateFirstBoard(5);
 
 // Função deleteBoard
@@ -71,7 +71,7 @@ function deleteBoard() {
   for (let index = pixelBoard.childNodes.length - 1; index >= 0; index -= 1) {
     pixelBoard.removeChild(pixelBoard.childNodes[index]);
   }
-};
+}
 
 // Função anônima
 // Objetivos:
@@ -91,7 +91,7 @@ document.addEventListener('click', function (event) {
       event.target.style.backgroundColor = 'white';
     } else {
       event.target.style.backgroundColor = selectedColor;
-      saveColorSequence()
+      saveColorSequence();
     }
   }
 });
@@ -106,7 +106,7 @@ function saveColorSequence() {
     colorsUsed.push(pixelColor);
   }
   localStorage.setItem('pixelBoard', JSON.stringify(colorsUsed));
-};
+}
 
 // Função clear
 // Objetivo: Transferir backgroundcolor white a todos pixels
@@ -116,7 +116,7 @@ function clear() {
   for (let index = 0; index < pixels.length; index += 1) {
     pixels[index].style.backgroundColor = 'white';
   }
-};
+}
 
 // Elemento clearButton
 // Objetivo: "Limpar" todos pixels
@@ -131,33 +131,30 @@ function generateBoard(size) {
 
     if (size < 0) {
       alert('Não são permitidos valores menores que zero, digite novamente.');
-
     } if (size < 5) {
       newSize = 5;
-
     } if (size > 50) {
       newSize = 50;
-
     } for (let index = 0; index < newSize; index += 1) {
       const divLine = document.createElement('div');
       divLine.className = 'pixel-line';
       pixelBoard.appendChild(divLine);
-      for (let index = 0; index < newSize; index += 1) {
+      for (let i = 0; i < newSize; i += 1) {
         const pixel = document.createElement('div');
         pixel.className = 'pixel';
         divLine.appendChild(pixel);
       }
     }
   } else {
-    alert('Board inválido!')
+    alert('Board inválido!');
   }
-};
+}
 
 // Função reorganizeBoard
 // Objetivo: Reorganizar quadro de pixels de acordo com tamanho solicitado pelo usuário
 function reorganizeBoard() {
   generateBoard(inputBoard.value);
-};
+}
 
 // Elemento vqvButton
 // Objetivo: Gerar quadro de acordo com tamanho solicitado pelo usuário
@@ -174,11 +171,11 @@ function rescuePreviousPaintedBoard() {
       pixel[index].style.backgroundColor = recoverePaintedBoard[index];
     }
   }
-};
+}
 
 // Window.onload
 // Objetivo: Acionar resgate de informações salvas ao recarregar página
 window.onload = () => {
   rescuePreviousColorPalette();
   rescuePreviousPaintedBoard();
-};
+}
