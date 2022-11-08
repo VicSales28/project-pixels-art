@@ -1,15 +1,15 @@
 // Constantes e variáveis utilizadas
 const paletteItens = document.querySelectorAll('.color');
-const randomColorButton = document.getElementById('button-random-color')
-const clearButton = document.getElementById('clear-board')
+const randomColorButton = document.getElementById('button-random-color');
+const clearButton = document.getElementById('clear-board');
 const inputBoard = document.getElementById('board-size');
 const vqvButton = document.getElementById('generate-board');
 const pixelBoard = document.getElementById('pixel-board');
-let blackSelected = document.getElementById('blackSelected');
+const blackSelected = document.getElementById('black');
 let selectedColor = ' rgb(0,0,0)';
 
 // Função getRandomColor
-// Objetivo: Gerar cores aleatórias para a paleta de cores 
+// Objetivo: Gerar cores aleatórias para a paleta de cores
 function getRandomColor () {
   let r = Math.floor(Math.random() * 255);
   let g = Math.floor(Math.random() * 255);
@@ -29,8 +29,8 @@ const createAndSaveRandomPalette = () => {
 };
 
 // Elemento randomColorButton
-// Objetivo: Trocar as cores da paleta de maneira aleatória 
-randomColorButton.addEventListener('click',createAndSaveRandomPalette);
+// Objetivo: Trocar as cores da paleta de maneira aleatória
+randomColorButton.addEventListener('click', createAndSaveRandomPalette);
 
 // Função rescuePreviousColorPalette
 // Objetivo: Recuperar cores da paleta salvas no localStorage
@@ -38,7 +38,6 @@ function rescuePreviousColorPalette() {
   const recovereColorPalette = JSON.parse(localStorage.getItem('colorPalette'));
 
   if (recovereColorPalette != null && recovereColorPalette !== '[]') {
-
     for (let index = 1; index < recovereColorPalette.length; index += 1) {
       paletteItens[index].style.backgroundColor = recovereColorPalette[index];
     }
@@ -78,34 +77,36 @@ function deleteBoard() {
 // Objetivos:
 // 1 - Alterar classe entre os paletteItens clicados
 // 2 - Transferir ao pixel clicado backgroundcolor conforme paletteItem clicado
-// 3 - Sequência de cores usadas no quadro são salvas no localStorage
 
 document.addEventListener('click', function (event) {
   if (event.target.classList.contains('color')) {
-    if (event.button == 0) {
+    if (event.button === 0) {
       document.querySelector('.selected').classList.remove('selected');
       event.target.classList.add('selected');
       selectedColor = event.target.style.backgroundColor;
     }
   }
-
   if (event.target.classList.contains('pixel')) {
-    if (event.button == !0) {
+    if (event.button === !0) {
       event.target.style.backgroundColor = 'white';
     } else {
       event.target.style.backgroundColor = selectedColor;
-
-      const pixel = document.querySelectorAll('.pixel');
-      const colorsUsed = [];
-
-      for (let index = 0; index < pixel.length; index += 1) {
-        const pixelColor = pixel[index].style.backgroundColor;
-        colorsUsed.push(pixelColor);
-      }
-      localStorage.setItem('pixelBoard', JSON.stringify(colorsUsed));
+      saveColorSequence()
     }
   }
 });
+
+// Função saveColorSequence
+// Objetivo: Salvar sequência de cores usadas para colorir o quadro de pixels
+function saveColorSequence() {
+  const pixel = document.querySelectorAll('.pixel');
+  const colorsUsed = [];
+  for (let index = 0; index < pixel.length; index += 1) {
+    const pixelColor = pixel[index].style.backgroundColor;
+    colorsUsed.push(pixelColor);
+  }
+  localStorage.setItem('pixelBoard', JSON.stringify(colorsUsed));
+};
 
 // Função clear
 // Objetivo: Transferir backgroundcolor white a todos pixels
@@ -141,7 +142,6 @@ function generateBoard(size) {
       const divLine = document.createElement('div');
       divLine.className = 'pixel-line';
       pixelBoard.appendChild(divLine);
-
       for (let index = 0; index < newSize; index += 1) {
         const pixel = document.createElement('div');
         pixel.className = 'pixel';
@@ -179,6 +179,6 @@ function rescuePreviousPaintedBoard() {
 // Window.onload
 // Objetivo: Acionar resgate de informações salvas ao recarregar página
 window.onload = () => {
-  rescuePreviousColorPalette()
-  rescuePreviousPaintedBoard()
+  rescuePreviousColorPalette();
+  rescuePreviousPaintedBoard();
 };
