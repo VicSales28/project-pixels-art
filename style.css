@@ -1,36 +1,74 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
 #title {
-  font-family: 'Courier New', Courier, monospace;
-  font-size: 25px;
-  margin-top: 30px;
+  font-family: 'Press Start 2P', cursive;
+  font-size: 40px;
   color: black;
+  text-align: center;
+  margin-top: 50px;
 }
 
 #headerParagraph {
-  font-family: 'Courier New', Courier, monospace;
+  font-family: 'Press Start 2P', cursive;
+  font-size: 20px;
+  color: rgb(48, 48, 48);
+  text-align: center;
+}
+
+#instructions-palette {
+  font-family: 'Press Start 2P', cursive;
+  font-size: 10px;
   color: gray;
+  width: fit-content;
+  margin: 0 auto 12px;
 }
 
 #color-palette {
   width: fit-content;
-  margin-bottom: 12px;
+  margin: 0 auto 12px;
 }
 
 .color {
   display: inline-block;
-  width: 25px;
-  height: 25px;
+  width: 40px;
+  height: 40px;
   border: 1px solid black;
   border-radius: 50%;
 }
 
 #buttons {
-  display: inline-block;
-  justify-content: center;
-  padding: 5px;
+  width: fit-content;
+  margin: 0 auto 12px;
+}
+
+#button-random-color {
+  padding: 5px 20px;
+}
+
+#clear-board {
+  padding: 5px 20px;
+}
+
+#instructions-board {
+  font-family: 'Press Start 2P', cursive;
+  font-size: 10px;
+  color: gray;
+  width: fit-content;
+  margin: 0 auto 12px;
 }
 
 #board-menu {
-  margin-bottom: 20px;
+  width: fit-content;
+  margin: 0 auto 12px;
+}
+
+#board-size {
+  padding: 5px 10px;
+  width: 130px;
+}
+
+#generate-board {
+  padding: 5px 20px;
 }
 
 #pixel-board {
@@ -49,5 +87,4 @@
   width: 40px;
   height: 40px;
   border: 1px solid black;
-  display: block;
 }

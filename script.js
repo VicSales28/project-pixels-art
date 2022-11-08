@@ -26,7 +26,7 @@ const createAndSaveRandomPalette = () => {
   for (let index = 1; index < paletteItens.length; index += 1) {
     colorList.push(paletteItens[index].style.backgroundColor = getRandomColor());
   } localStorage.setItem('colorPalette', JSON.stringify(colorList));
-}
+};
 
 // Elemento randomColorButton
 // Objetivo: Trocar as cores da paleta de maneira aleatória
@@ -46,16 +46,16 @@ function rescuePreviousColorPalette() {
   }
 }
 
-// Função generateFirstBoard
-// Objetivo: Gerar quadro de pixels inicial 5 x 5
-function generateFirstBoard(size) {
+// Função generateBoard
+// Objetivo: Gerar quadro de pixels dinâmico
+function generateBoard(size) {
   if (size) {
     const newSize = size;
     for (let index = 0; index < newSize; index += 1) {
       const divLine = document.createElement('div');
       divLine.className = 'pixel-line';
       pixelBoard.appendChild(divLine);
-      for (let index = 0; index < newSize; index += 1) {
+      for (let i = 0; i < newSize; i += 1) {
         const pixel = document.createElement('div');
         pixel.className = 'pixel';
         divLine.appendChild(pixel);
@@ -63,7 +63,7 @@ function generateFirstBoard(size) {
     }
   }
 }
-generateFirstBoard(5);
+generateBoard(5); // Quadro de pixels inicial 5 x 5
 
 // Função deleteBoard
 // Objetivo: Remover quadro de pixels inicial 5 x 5
@@ -122,9 +122,9 @@ function clear() {
 // Objetivo: "Limpar" todos pixels
 clearButton.addEventListener('click', clear);
 
-// Função generateBoard
-// Objetivo: Gerar quadro dinâmico de pixels
-function generateBoard(size) {
+// Função generateCustomBoard
+// Objetivo: Gerar quadro dinâmico personalizado pelo usuário
+function generateCustomBoard(size) {
   if (size) {
     let newSize = size;
     deleteBoard();
@@ -135,16 +135,7 @@ function generateBoard(size) {
       newSize = 5;
     } if (size > 50) {
       newSize = 50;
-    } for (let index = 0; index < newSize; index += 1) {
-      const divLine = document.createElement('div');
-      divLine.className = 'pixel-line';
-      pixelBoard.appendChild(divLine);
-      for (let i = 0; i < newSize; i += 1) {
-        const pixel = document.createElement('div');
-        pixel.className = 'pixel';
-        divLine.appendChild(pixel);
-      }
-    }
+    } generateBoard(newSize);
   } else {
     alert('Board inválido!');
   }
@@ -153,7 +144,7 @@ function generateBoard(size) {
 // Função reorganizeBoard
 // Objetivo: Reorganizar quadro de pixels de acordo com tamanho solicitado pelo usuário
 function reorganizeBoard() {
-  generateBoard(inputBoard.value);
+  generateCustomBoard(inputBoard.value);
 }
 
 // Elemento vqvButton
@@ -178,4 +169,4 @@ function rescuePreviousPaintedBoard() {
 window.onload = () => {
   rescuePreviousColorPalette();
   rescuePreviousPaintedBoard();
-}
+};
