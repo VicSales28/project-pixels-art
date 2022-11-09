@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap') ;
 
 #title {
   font-family: 'Press Start 2P', cursive;
@@ -64,7 +64,7 @@
 
 #board-size {
   padding: 5px 10px;
-  width: 130px;
+  width: 180px;
 }
 
 #generate-board {

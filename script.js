@@ -133,9 +133,12 @@ function generateCustomBoard(size) {
       alert('Não são permitidos valores menores que zero, digite novamente.');
     } if (size < 5) {
       newSize = 5;
+      localStorage.setItem('boardSize', JSON.stringify(5));
     } if (size > 50) {
       newSize = 50;
+      localStorage.setItem('boardSize', JSON.stringify(50));
     } generateBoard(newSize);
+      localStorage.setItem('boardSize', JSON.stringify(newSize));
   } else {
     alert('Board inválido!');
   }
@@ -164,9 +167,15 @@ function rescuePreviousPaintedBoard() {
   }
 }
 
+function rescuePreviousSize() {
+  let recovereSize = JSON.parse(localStorage.getItem('boardSize'));
+  generateCustomBoard(recovereSize)
+}
+
 // Window.onload
 // Objetivo: Acionar resgate de informações salvas ao recarregar página
 window.onload = () => {
   rescuePreviousColorPalette();
+  rescuePreviousSize();
   rescuePreviousPaintedBoard();
 };
