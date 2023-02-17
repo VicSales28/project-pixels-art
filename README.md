@@ -1,6 +1,6 @@
 # Pixels Art 🎨 (TRYBE)
 
-My third project produced in the Fundamentals module 🚀🚀🚀
+My third project produced in the Fundamentals module, during my time studying JS at Trybe Programming School 🚀🚀🚀
 
 In this project, I implemented a pixel art editor where the user can choose a color from a color palette and can paint whatever he wants on a whiteboard.
 
