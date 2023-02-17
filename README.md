@@ -1,4 +1,4 @@
-# Pixels Art 🎨 (TRYBE)
+# Pixels Art 🎨
 
 My third project produced while I was studying JS at Trybe Programming School 🚀🚀🚀
 
