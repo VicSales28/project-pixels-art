@@ -1,6 +1,6 @@
 # Pixels Art 🎨
 
-My third project produced while I was studying JS at Trybe Programming School 🚀🚀🚀
+My third project produced while I was studying JS at Trybe Programming School.
 
 In this project, I implemented a pixel art editor where the user can choose a color from a color palette and can paint whatever he wants on a whiteboard.
 
@@ -17,6 +17,7 @@ Built files:
 `style.css`
 `script.js`
 
+Obs.: The image in the background isn't mine.
 
 </details>
 
